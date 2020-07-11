@@ -6,6 +6,4 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - checkout
-      - run:
-          name: The First Step
-          command: ./client-generator.sh
+      - run: ./client-generator.sh
