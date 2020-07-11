@@ -6,4 +6,5 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - checkout
+      - run: chmod +x client-generator.sh
       - run: ./client-generator.sh
