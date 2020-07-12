@@ -10,4 +10,7 @@ CONFIG_FILE_NAME="config.json"
 echo "Generating Fineract Client SDK..."
 echo "Output folder: " $OUTPUT_FOLDER
 
+rm -r $OUTPUT_FOLDER && mkdir $OUTPUT_FOLDER
+
+# Generate SDK
 java -jar $SWAGGER_JAR generate -i $INPUT_SPEC_FILE -l $CLIENT_LANGUAGE -o $OUTPUT_FOLDER -c $CONFIG_FILE_NAME

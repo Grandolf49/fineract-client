@@ -8,3 +8,4 @@ jobs:
       - checkout
       - run: chmod +x client-generator.sh
       - run: ./client-generator.sh
+      - run: cd java/retrofit2/ && mvn clean package
