@@ -1,5 +1,5 @@
 version: 2.1
-job:
+jobs:
   build:
     docker:
       - image: circleci/openjdk:8u252
