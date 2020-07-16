@@ -27,7 +27,7 @@ jobs:
       - attach_workspace:
           at: java/retrofit2/
       - run: go get -u github.com/tcnksm/ghr
-      - run: cd java/retrofit2/target && ls
+      - run: cd java/retrofit2 && ls
       - run:
           name: "Publish Release on GitHub"
           command: |
