@@ -27,14 +27,14 @@ jobs:
       - attach_workspace:
           at: java/retrofit2/
       - run: go get -u github.com/tcnksm/ghr
-      - run: ls
+      - run: cd java/retrofit2/
       - run:
           name: "Publish Release on GitHub"
           command: |
             VERSION=1.0.0
             ghr -t "${GITHUB_TOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -delete ${VERSION} target/fineract-client-1.0.jar
 
-# Defining workflows to put build and release together
+# Defining workflows to put build and release togethcd java/retrofit2/
 workflows:
   version: 2
   main:
