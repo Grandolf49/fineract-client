@@ -1,25 +1,54 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  job-executor:
     docker:
       - image: circleci/openjdk:8u252
+
+# Defining jobs for building and releasing SDK
+jobs:
+  build:
+    executor: job-executor
     steps:
       - checkout
       - run: chmod +x client-generator.sh
       - run: ./client-generator.sh
       - run: cd java/retrofit2/ && mvn clean package
+      - persist_to_workspace:
+          root: java/retrofit2/
+          paths:
+            - target/
 
-workflows:
-  version: 2
-  main:
-    jobs:
+  publish-github-release:
+    requires:
       - build
-      - publish-github-release:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^\d+\.\d+\.\d+$/
+    filters:
+      branches:
+        ignore: /.*/
+      tags:
+        only: /^\d+\.\d+\.\d+$/
+
+    executor: job-executor
+    steps:
+      - attach_workspace:
+          at: java/retrofit2/target/
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            VERSION=$(fineract-client-1.0.jar --version)
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} java/retrofit2/target/
+
+# Defining workflows to put build and release together
+#workflows:
+#  version: 2
+#  main:
+#    jobs:
+#      - build
+#      - publish-github-release:
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              ignore: /.*/
+#            tags:
+#              only: /^\d+\.\d+\.\d+$/
