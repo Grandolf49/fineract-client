@@ -15,9 +15,9 @@ jobs:
       - run: ./client-generator.sh
       - run: cd java/retrofit2/ && mvn clean package -Dmaven.test.skip=true
       - persist_to_workspace:
-          root: java/retrofit2/
+          root: /
           paths:
-            - target/
+            - /
 
   publish-github-release:
     docker:
