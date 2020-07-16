@@ -20,14 +20,6 @@ jobs:
             - target/
 
   publish-github-release:
-    requires:
-      - build
-    filters:
-      branches:
-        ignore: /.*/
-      tags:
-        only: /^\d+\.\d+\.\d+$/
-
     executor: job-executor
     steps:
       - attach_workspace:
@@ -35,20 +27,20 @@ jobs:
       - run:
           name: "Publish Release on GitHub"
           command: |
-            VERSION=$(fineract-client-1.0.jar --version)
+            VERSION=$(my-binary --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} java/retrofit2/target/
 
 # Defining workflows to put build and release together
-#workflows:
-#  version: 2
-#  main:
-#    jobs:
-#      - build
-#      - publish-github-release:
-#          requires:
-#            - build
-#          filters:
-#            branches:
-#              ignore: /.*/
-#            tags:
-#              only: /^\d+\.\d+\.\d+$/
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+      - publish-github-release:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
