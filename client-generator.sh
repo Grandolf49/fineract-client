@@ -11,7 +11,7 @@ echo "Generating Fineract Client SDK..."
 echo "Output folder: " $OUTPUT_FOLDER
 
 # Remove output directory if it already exists
-if [ -d "$OUTPUT_FOLDER" ]; then rm -Rf $OUTPUT_FOLDER; fi
+if [ -d "$OUTPUT_FOLDER" ]; then echo "Output directory exists. Deleting the directory..." && rm -rf $OUTPUT_FOLDER; fi
 
 # Create output directory
 mkdir $OUTPUT_FOLDER
