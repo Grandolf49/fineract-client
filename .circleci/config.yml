@@ -21,10 +21,11 @@ jobs:
 
   publish-github-release:
     docker:
-      - image: cibuilds/github:0.13
+      - image: circleci/golang:1.12
     steps:
       - attach_workspace:
           at: java/retrofit2/target/
+      - run: go get -u github.com/tcnksm/ghr
       - run:
           name: "Publish Release on GitHub"
           command: |
