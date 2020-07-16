@@ -18,7 +18,7 @@ jobs:
       - persist_to_workspace:
           root: java/retrofit2/
           paths:
-            - /target
+            - target/
 
   publish-github-release:
     docker:
