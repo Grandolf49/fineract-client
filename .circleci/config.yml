@@ -20,7 +20,8 @@ jobs:
             - target/
 
   publish-github-release:
-    executor: job-executor
+    docker:
+      - image: cibuilds/github:0.10
     steps:
       - attach_workspace:
           at: java/retrofit2/target/
