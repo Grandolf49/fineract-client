@@ -11,6 +11,7 @@ jobs:
     executor: job-executor
     steps:
       - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
       - run: cd workspace && git clone https://github.com/Grandolf49/fineract-client.git
       - run: cd workspace/fineract-client && chmod +x client-generator.sh
       - run: cd workspace/fineract-client && ./client-generator.sh
@@ -18,7 +19,7 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths:
-            - fineract-client
+            - echo-output
 
   publish-github-release:
     docker:
@@ -26,7 +27,12 @@ jobs:
     steps:
       - attach_workspace:
           at: workspace
-      - run: cd workspace && ls -r
+      - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
       #- run: go get -u github.com/tcnksm/ghr
       #- run: cd out && ls -a
       #- run:
