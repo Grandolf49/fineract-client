@@ -10,21 +10,22 @@ jobs:
   build:
     executor: job-executor
     steps:
-      - checkout
+      - run: mkdir -p workspace && cd workspace
+      - run: git clone https://github.com/Grandolf49/fineract-client.git && cd fineract-client
       - run: chmod +x client-generator.sh
       - run: ./client-generator.sh
       - run: cd out && mvn clean package -Dmaven.test.skip=true
       - persist_to_workspace:
-          root: out
+          root: workspace
           paths:
-            - target
+            - fineract-client
 
   publish-github-release:
     docker:
       - image: circleci/golang:1.12
     steps:
       - attach_workspace:
-          at: /
+          at: workspace
       - run: ls -a
       - run: go get -u github.com/tcnksm/ghr
       - run: cd out && ls -a
