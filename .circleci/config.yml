@@ -1,14 +1,18 @@
 version: 2.1
 
 executors:
-  my-executor:
+  build-executor:
     docker:
       - image: circleci/openjdk:8u252
+    working_directory: /tmp
+  publish-executor:
+    docker:
+      - image: circleci/golang:1.12
     working_directory: /tmp
 
 jobs:
   flow:
-    executor: my-executor
+    executor: build-executor
     steps:
       - run: mkdir -p workspace
       # - run: echo "Hello, world!" > workspace/echo-output
@@ -27,12 +31,12 @@ jobs:
             - fineract-client/out
 
   downstream:
-    executor: my-executor
+    executor: publish-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
-      - run: cd workspace && ls -R
+      - run: cd workspace/fineract-client/out
 
 workflows:
   version: 2
