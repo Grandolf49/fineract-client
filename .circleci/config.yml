@@ -11,17 +11,29 @@ executors:
     working_directory: /tmp
 
 jobs:
-  flow:
+  build:
     executor: build-executor
     steps:
-      - run: mkdir -p workspace
-      # - run: echo "Hello, world!" > workspace/echo-output
-      - run: cd workspace && git clone https://github.com/Grandolf49/fineract-client.git
-      - run: cd workspace/fineract-client && chmod +x client-generator.sh
-      # - run: ls -r
-      - run: cd workspace/fineract-client && ./client-generator.sh
-      - run: cd workspace/fineract-client/out && mvn clean package -Dmaven.test.skip=true
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
+      - run:
+          name: "Creating Workspace"
+          command: mkdir -p workspace
+      - run:
+          name: "Checkout Code"
+          command: |
+            cd workspace
+            git clone https://github.com/Grandolf49/fineract-client.git
+      - run:
+          name: "Generate SDK"
+          command: |
+            cd workspace/fineract-client
+            chmod +x client-generator.sh
+            ./client-generator.sh
+      - run:
+          name: "Build SDK"
+          command: |
+            cd workspace/fineract-client/out
+            mvn clean package -Dmaven.test.skip=true
+
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
@@ -30,7 +42,7 @@ jobs:
           paths:
             - fineract-client/out
 
-  downstream:
+  publish-github-release:
     executor: publish-executor
     steps:
       - attach_workspace:
@@ -46,10 +58,14 @@ jobs:
 
 workflows:
   version: 2
-
-  btd:
+  main:
     jobs:
-      - flow
-      - downstream:
+      - build
+      - publish-github-release:
           requires:
-            - flow
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
