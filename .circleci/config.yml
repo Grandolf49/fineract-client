@@ -24,7 +24,7 @@ jobs:
           root: workspace
           # Must be relative path from root
           paths:
-            - echo-output
+            - fineract-client
 
   downstream:
     executor: my-executor
@@ -32,7 +32,7 @@ jobs:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
-      - run: cd workspace && ls -r
+      - run: cd workspace && ls -R
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
             echo "It worked!";
