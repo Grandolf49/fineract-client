@@ -11,7 +11,7 @@ jobs:
     executor: job-executor
     steps:
       - run: mkdir -p workspace && cd workspace
-      - run: git clone https://github.com/Grandolf49/fineract-client.git && cd fineract-client
+      - run: git clone https://github.com/Grandolf49/fineract-client.git && cd fineract-client && ls -a
       - run: chmod +x client-generator.sh
       - run: ./client-generator.sh
       - run: cd out && mvn clean package -Dmaven.test.skip=true
