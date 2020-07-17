@@ -10,14 +10,12 @@ jobs:
   build:
     executor: job-executor
     steps:
-      - run: mkdir -p workspace
-      - run: ls -a && cd workspace
       - checkout
       - run: chmod +x client-generator.sh
       - run: ./client-generator.sh
       - run: cd out && mvn clean package -Dmaven.test.skip=true
       - persist_to_workspace:
-          root: workspace
+          root: /
           paths:
             - out
 
@@ -26,7 +24,7 @@ jobs:
       - image: circleci/golang:1.12
     steps:
       - attach_workspace:
-          at: workspace
+          at: /
       - run: ls -a
       - run: go get -u github.com/tcnksm/ghr
       - run: cd out && ls -a
