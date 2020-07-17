@@ -10,13 +10,11 @@ jobs:
   build:
     executor: job-executor
     steps:
-      - run: mkdir -p workspace && cd workspace
-      - run: ls -a
+      - run: mkdir -p workspace
       - run: cd workspace && git clone https://github.com/Grandolf49/fineract-client.git
-      - run: ls -a
-      - run: cd fineract-client && chmod +x client-generator.sh
-      - run: ./client-generator.sh
-      - run: cd out && mvn clean package -Dmaven.test.skip=true
+      - run: cd workspace/fineract-client && chmod +x client-generator.sh
+      - run: cd workspace/fineract-client && ./client-generator.sh
+      - run: cd workspace/fineract-client/out && mvn clean package -Dmaven.test.skip=true
       - persist_to_workspace:
           root: workspace
           paths:
