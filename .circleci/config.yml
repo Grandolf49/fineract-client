@@ -25,8 +25,8 @@ jobs:
       - image: circleci/golang:1.12
     steps:
       - attach_workspace:
-          at: workspace/fineract-client
-      - run: ls -r
+          at: workspace
+      - run: cd workspace && ls -r
       #- run: go get -u github.com/tcnksm/ghr
       #- run: cd out && ls -a
       #- run:
