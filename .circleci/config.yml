@@ -26,7 +26,7 @@ jobs:
     steps:
       - attach_workspace:
           at: workspace
-      - run: ls -a
+      - run: ls -r
       #- run: go get -u github.com/tcnksm/ghr
       #- run: cd out && ls -a
       #- run:
