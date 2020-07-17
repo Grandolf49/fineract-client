@@ -12,7 +12,11 @@ jobs:
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
-
+      - run: cd workspace && git clone https://github.com/Grandolf49/fineract-client.git
+      - run: cd workspace/fineract-client && chmod +x client-generator.sh
+      - run: ls -r
+      - run: cd workspace/fineract-client && ./client-generator.sh
+      - run: cd workspace/fineract-client/out && mvn clean package -Dmaven.test.skip=true
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
