@@ -62,8 +62,6 @@ workflows:
     jobs:
       - build
       - publish-github-release:
-          requires:
-            - build
           filters:
             branches:
               ignore: /.*/
