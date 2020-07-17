@@ -15,9 +15,9 @@ jobs:
       - run: ./client-generator.sh
       - run: cd out && mvn clean package -Dmaven.test.skip=true
       - persist_to_workspace:
-          root: /
+          root: out
           paths:
-            - out
+            - target
 
   publish-github-release:
     docker:
