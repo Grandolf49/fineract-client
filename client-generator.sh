@@ -3,9 +3,15 @@
 # Path Variables
 SWAGGER_JAR="swagger-codegen-cli.jar"
 INPUT_SPEC_FILE="https://gist.githubusercontent.com/Grandolf49/62b084ebeec49ae56f729466d0c5ceb0/raw/bc63b70f0c6298a1e99505ebc3445f7f3b6b945d/response.json"
+#INPUT_SPEC_FILE="fineract/build/classes/java/main/static/swagger-ui/fineract.json"
 CLIENT_LANGUAGE="java"
 OUTPUT_FOLDER="out"
 CONFIG_FILE_NAME="config.json"
+
+# Generate API Spec File
+#git clone https://github.com/apache/fineract.git
+#cd fineract
+#./gradlew build
 
 echo "Generating Fineract Client SDK..."
 echo "Output folder: " $OUTPUT_FOLDER
@@ -17,6 +23,7 @@ if [ -d "$OUTPUT_FOLDER" ]; then echo "Output directory exists. Deleting the dir
 mkdir $OUTPUT_FOLDER
 
 # Generate SDK
+chmod +x $SWAGGER_JAR
 java -jar $SWAGGER_JAR generate \
 -i $INPUT_SPEC_FILE \
 -l $CLIENT_LANGUAGE \
