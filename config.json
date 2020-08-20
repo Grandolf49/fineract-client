@@ -1,11 +1,12 @@
 {
-    "library": "retrofit2",
-    "modelPackage": "org.mifos.models",
-    "apiPackage": "org.mifos.services",
-    "invokerPackage": "org.mifos",
-    "groupId": "org.mifos",
-    "artifactId": "fineract-client",
+    "groupId": "org.mifos.fineract",
+    "artifactId": "client",
+    "invokerPackage": "org.mifos.fineract",
+    "modelPackage": "org.mifos.fineract.models",
+    "apiPackage": "org.mifos.fineract.services",
     "artifactVersion": "1.0.0",
-    "artifactDescription": "artifactDescription",
-    "dateLibrary": "joda"
+    "artifactDescription": "Fineract Client Library based on Java and Retrofit2",
+    "dateLibrary": "joda",
+    "library": "retrofit2",
+    "hideGenerationTimestamp": true
 }
