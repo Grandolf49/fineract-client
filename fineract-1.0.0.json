@@ -9,7 +9,7 @@
             "name": "https://gitter.im/openMF/mifos"
         }
     },
-    "host": "https://demo.openmf.org",
+    "host": "demo.openmf.org",
     "basePath": "/fineract-provider/api/v1",
     "tags": [
         {
