@@ -15,3 +15,22 @@ Generates a Fineract Client SDK using [Swagger Codegen](https://github.com/swagg
 3. `client-{VERSION}.jar` file will be generated under `target` folder.
 4. To skip tests and javadoc:  
     - Run `mvn -DskipTests=true "-Dmaven.javadoc.skip=true" clean package`
+
+## Release SDK
+
+To release the SDK, all you have to do is create a Git Tag. Rest of the work is performed by CircleCI. It is configured to create a GitHub Release as soon as a Git Tag is pushed.
+
+1. Create a Git Tag
+   - Run `git tag {tag_name}`
+2. Push tag to origin
+   - Run `git push origin --tags`
+
+A GitHub Release will be created after the tag is pushed.
+
+## Delete Tags
+
+To deleta local tags
+1. Run `git tag -d {tag_name}`
+
+To delete remote tags
+1. Run `git push origin --delete {tag_name}`
