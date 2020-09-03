@@ -5,7 +5,7 @@ Generates a Fineract Client SDK using [Swagger Codegen](https://github.com/swagg
 ## Generate SDK
 
 1. Clone the repository
-2. Run `./client-generator.sh` in CMD for Windows or Linux Terminal
+2. Run `./client-generator.sh` in terminal. Windows users should use **Git Bash** for executing the script.
 3. The SDK will be generated under the folder `out`
 4. For more customizations, update the `config.json` file with [these](https://gist.github.com/Grandolf49/2d222c3d1d0b834ad8f02b5fde8b4c14) options.
 
