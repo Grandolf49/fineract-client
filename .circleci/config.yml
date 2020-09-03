@@ -60,7 +60,7 @@ jobs:
             -r "${CIRCLE_PROJECT_REPONAME}" \
             -c "${CIRCLE_SHA1}" \
             -delete ${VERSION} \
-            target/fineract-client-1.0.0.jar
+            target/client-1.0.0.jar
 
 workflows:
   version: 2
