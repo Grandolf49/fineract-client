@@ -2,12 +2,11 @@
 
 # Path Variables
 SWAGGER_JAR="swagger-codegen-cli.jar"
-#INPUT_SPEC_FILE="https://gist.githubusercontent.com/Grandolf49/62b084ebeec49ae56f729466d0c5ceb0/raw/bc63b70f0c6298a1e99505ebc3445f7f3b6b945d/response.json"
-#INPUT_SPEC_FILE="fineract/build/classes/java/main/static/swagger-ui/fineract.json"
-INPUT_SPEC_FILE="https://gist.githubusercontent.com/Grandolf49/62b084ebeec49ae56f729466d0c5ceb0/raw/bc63b70f0c6298a1e99505ebc3445f7f3b6b945d/response.json"
 CLIENT_LANGUAGE="java"
 OUTPUT_FOLDER="out"
 CONFIG_FILE_NAME="config.json"
+INPUT_SPEC_FILE="fineract-1.0.0.json"
+#INPUT_SPEC_FILE="fineract-1.3.0.yaml"
 
 echo "Generating Fineract Client SDK..."
 echo "Output folder: " $OUTPUT_FOLDER
