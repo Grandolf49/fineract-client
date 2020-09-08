@@ -6,7 +6,7 @@
     "apiPackage": "org.mifos.fineract.services",
     "artifactVersion": "1.0.0",
     "artifactDescription": "Fineract Client Library based on Java and Retrofit2",
-    "dateLibrary": "java8",
+    "dateLibrary": "joda",
     "library": "retrofit2",
     "hideGenerationTimestamp": true
 }
